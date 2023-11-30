@@ -17,12 +17,9 @@ args = parser.parse_args()
 # Manage API
 @app.route('/api/v1/face_detector', methods=["POST"])
 def face_detector():
-    #data = request.get_json()
-    #img_bytes = data["img"]
     img_bytes = request.files["img"]
 
     # Read input image
-    #img = Image.open(BytesIO(base64.b64decode(img_bytes.stream)))
     img = Image.open(img_bytes.stream)
 
     # Measure inference time
@@ -48,11 +45,10 @@ def face_detector():
 
 @app.route('/api/v1/identify', methods=["POST"])
 def identify():
-    data = request.get_json()
-    img_bytes = data["img"]
+    img_bytes = request.files["img"]
 
     # Read input image
-    img = Image.open(BytesIO(base64.b64decode(img_bytes)))
+    img = Image.open(img_bytes.stream)
 
     # Measure inference time
     t0 = time.time()
